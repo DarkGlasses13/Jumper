@@ -12,11 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
   m_Name: Infrastructure
   m_EditorClassIdentifier: 
-  m_GroupName: Packed Assets
+  m_GroupName: Infrastructure
   m_Data:
     m_SerializedData: []
   m_GUID: 77edd5874560c244d8e88a67e508f2cd
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 3fc8acdd13e6c734bafef6554d6fdbcd
+    m_Address: Boot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 619f68a29be06b24789ad20bad7bc0a2
+    m_Address: Empty
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ef8e4516509a71d4e84c0ff5c985d70e
+    m_Address: Project Installer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 884185c102bd6024384530b32d25c1ae, type: 2}
   m_SchemaSet:

@@ -1,3 +1,4 @@
+using Assets._Project.Infrastructure.Loading;
 using Assets._Project.Infrastructure.Scene_Loading;
 using UnityEngine;
 using Zenject;
@@ -22,7 +23,16 @@ namespace Assets._Project.Infrastructure
                 .FromNew()
                 .AsSingle();
 
+            Container
+                .Bind<Camera>()
+                .FromComponentInHierarchy()
+                .AsSingle();
 
+            Container
+                .Bind<ILoadingScreen>()
+                .To<LoadingScreen>()
+                .FromComponentInHierarchy()
+                .AsSingle();
         }
     }
 }
