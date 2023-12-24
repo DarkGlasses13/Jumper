@@ -1,3 +1,4 @@
+using Assets._Project.Gameplay.Level_Generation;
 using UnityEngine;
 using Zenject;
 
@@ -9,6 +10,11 @@ namespace Assets._Project.Gameplay
         public override void InstallBindings()
         {
             Container
+                .Bind<GameConfig>()
+                .FromFactory<GameConfigFactory>()
+                .AsSingle();
+
+            Container
                 .Bind(typeof(IInitializable), typeof(ILateDisposable))
                 .To<GameStartup>()
                 .FromNew()
@@ -19,6 +25,17 @@ namespace Assets._Project.Gameplay
                 .Bind<Canvas>()
                 .FromComponentInHierarchy()
                 .AsSingle();
+
+            Container
+                .Bind<Platform>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+
+            Container
+                .Bind<LevelGenerator>()
+                .FromNew()
+                .AsSingle()
+                .NonLazy();
         }
     }
 }
