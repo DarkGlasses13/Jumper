@@ -1,5 +1,6 @@
 using Assets._Project.Gameplay.Jump;
 using Assets._Project.Gameplay.Level_Generation;
+using Cinemachine;
 using UnityEngine;
 using Zenject;
 
@@ -44,6 +45,11 @@ namespace Assets._Project.Gameplay
             Container
                 .BindInterfacesAndSelfTo<JumpController>()
                 .FromNew()
+                .AsSingle();
+
+            Container
+                .Bind<CinemachineVirtualCamera>()
+                .FromComponentInHierarchy()
                 .AsSingle();
         }
     }
