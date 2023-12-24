@@ -15,3 +15,37 @@ MonoBehaviour:
   <InitialPlatformsCount>k__BackingField: 5
   <PlatformDistanceRange>k__BackingField: {x: 0.5, y: 10}
   <ClearPassedDistance>k__BackingField: 10
+  <JumpInputAction>k__BackingField:
+    m_Name: Jump Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8e98f414-c328-4780-b56b-829aabc2e686
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 128ebc7f-e20f-49c0-b206-c722334241fe
+      m_Path: <Gamepad>/buttonNorth
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 8b9a6a2d-9b74-477a-bb14-2f33dbd94fb6
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: d91a3316-5462-4ca1-b98d-a73fe4ab42f7
+      m_Path: <Touchscreen>/Press
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump Input
+      m_Flags: 0
+    m_Flags: 0
+  <JumpForce>k__BackingField: 10

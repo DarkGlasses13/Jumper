@@ -6,18 +6,11 @@ namespace Assets._Project.Gameplay
 {
     public class GameConfigFactory : IFactory<GameConfig>
     {
-        private GameConfig _instance;
-
         public GameConfig Create()
         {
-            if (_instance == null)
-            {
-                AsyncOperationHandle<GameConfig> loading = Addressables.LoadAssetAsync<GameConfig>("Game Config");
-                loading.WaitForCompletion();
-                _instance = loading.Result;
-            }
-
-            return _instance;
+            AsyncOperationHandle<GameConfig> loading = Addressables.LoadAssetAsync<GameConfig>("Game Config");
+            loading.WaitForCompletion();
+            return loading.Result;
         }
     }
 }

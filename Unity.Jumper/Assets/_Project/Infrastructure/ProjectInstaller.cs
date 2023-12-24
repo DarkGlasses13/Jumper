@@ -11,8 +11,7 @@ namespace Assets._Project.Infrastructure
         public override void InstallBindings()
         {
             Container
-                .Bind(typeof(IInitializable), typeof(ILateDisposable))
-                .To<Bootstrap>()
+                .BindInterfacesTo<Bootstrap>()
                 .FromNew()
                 .AsSingle()
                 .NonLazy();

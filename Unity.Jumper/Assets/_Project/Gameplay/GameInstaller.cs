@@ -1,3 +1,4 @@
+using Assets._Project.Gameplay.Jump;
 using Assets._Project.Gameplay.Level_Generation;
 using UnityEngine;
 using Zenject;
@@ -15,8 +16,7 @@ namespace Assets._Project.Gameplay
                 .AsSingle();
 
             Container
-                .Bind(typeof(IInitializable), typeof(ILateDisposable))
-                .To<GameStartup>()
+                .BindInterfacesTo<GameStartup>()
                 .FromNew()
                 .AsSingle()
                 .NonLazy();
@@ -34,8 +34,17 @@ namespace Assets._Project.Gameplay
             Container
                 .Bind<LevelGenerator>()
                 .FromNew()
-                .AsSingle()
-                .NonLazy();
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<PlayerCharacter>()
+                .FromFactory<PlayerCharacter, PlayerCharacterFactory>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<JumpController>()
+                .FromNew()
+                .AsSingle();
         }
     }
 }
