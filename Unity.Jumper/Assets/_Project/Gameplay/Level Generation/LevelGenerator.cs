@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Assets._Project.Gameplay.Level_Generation
 {
@@ -23,6 +24,12 @@ namespace Assets._Project.Gameplay.Level_Generation
             _platforms.Add(initial);
             _last = initial;
             _config = config;
+        }
+
+        public void Spawn(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+                Spawn();
         }
 
         public void Spawn() 
@@ -48,6 +55,10 @@ namespace Assets._Project.Gameplay.Level_Generation
             _last = instance;
         }
 
+        public void ClearBehind(Vector3 reference)
+        {
+        }
+
         private Platform Create()
         {
             if (_prefab == null)
@@ -63,12 +74,6 @@ namespace Assets._Project.Gameplay.Level_Generation
             instance.transform.SetParent(_container);
             _platforms.Add(instance);
             return instance;
-        }
-
-        public void Spawn(int amount)
-        {
-            for (int i = 0; i < amount; i++)
-                Spawn();
         }
     }
 }

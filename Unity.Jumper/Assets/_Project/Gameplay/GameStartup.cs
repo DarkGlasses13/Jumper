@@ -1,6 +1,7 @@
 ﻿using Assets._Project.Gameplay.Level_Generation;
 using Assets._Project.Infrastructure.Loading;
 using Cinemachine;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -39,6 +40,7 @@ namespace Assets._Project.Gameplay
             _levelGenerator.Spawn(_config.InitialPlatformsCount);
             _playerCharacter.transform.position = _initialPlatform.TopCenter + Vector3.up * (_playerCharacter.Height / 2);
             _playerCharacterFollowCamera.Follow = _playerCharacter.transform;
+            _playerCharacter.OnLand += OnCharacterLanded;
             _loadingScreen.FadeOut(OnFadeOut);
         }
 
@@ -46,8 +48,15 @@ namespace Assets._Project.Gameplay
         {
         }
 
+        private void OnCharacterLanded()
+        {
+            _levelGenerator.Spawn();
+            _levelGenerator.ClearBehind(_playerCharacter.transform.position);
+        }
+
         public void LateDispose()
         {
+            _playerCharacter.OnLand -= OnCharacterLanded;
         }
     }
 }

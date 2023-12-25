@@ -27,6 +27,7 @@ namespace Assets._Project.Gameplay.Jump
         private void OnLanded()
         {
             _jumper.Rigidbody.velocity = Vector2.zero;
+            _jumper.DrawTrajectory(null);
         }
 
         private void OnInputActionCanceled(InputAction.CallbackContext context)
@@ -45,8 +46,24 @@ namespace Assets._Project.Gameplay.Jump
                 if (_config.JumpInputAction.IsPressed())
                 {
                     _inputForce = Mathf.Clamp01(_inputForce += Time.deltaTime);
+                    _jumper.DrawTrajectory(CalculateTrajectory());
                 }
             }
+        }
+
+        private Vector3[] CalculateTrajectory()
+        {
+            Vector3[] pointrajectorys = new Vector3[_config.JumpTrajectoryLength];
+            Vector3 currentPosition = _jumper.Transform.position;
+            Vector3 currentVelocity = _config.JumpForce * _inputForce * new Vector3(1, 1, 0);
+
+            for (int i = 0; i < pointrajectorys.Length; i++)
+            {
+                float time = i * _config.JumpTrajectoryPointIntervals;
+                pointrajectorys[i] = currentPosition + currentVelocity * time + 0.5f * time * time * Physics.gravity;
+            }
+
+            return pointrajectorys;
         }
 
         private void Jump()

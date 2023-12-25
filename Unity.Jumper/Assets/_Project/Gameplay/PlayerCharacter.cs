@@ -6,17 +6,19 @@ using Zenject;
 
 namespace Assets._Project.Gameplay
 {
-    [RequireComponent(typeof(SpriteRenderer), typeof(Rigidbody2D))]
+    [RequireComponent(typeof(SpriteRenderer), typeof(Rigidbody2D), typeof(LineRenderer))]
     public class PlayerCharacter : MonoBehaviour, ICanJump
     {
         public event Action OnLand;
 
         private SpriteRenderer _renderer;
         private IGroundChecker _groundChecker;
+        private LineRenderer _lineRenderer;
 
         public bool IsGrounded => _groundChecker.IsGrounded;
         public float Height => _renderer.bounds.size.y;
         public Rigidbody2D Rigidbody { get; private set; }
+        public Transform Transform => transform;
 
         [Inject]
         public void Construct()
@@ -26,6 +28,7 @@ namespace Assets._Project.Gameplay
         private void Awake()
         {
             _renderer = GetComponent<SpriteRenderer>();
+            _lineRenderer = GetComponent<LineRenderer>();
             Rigidbody = GetComponent<Rigidbody2D>();
             _groundChecker = new CapsuleGroundChecker
             (
@@ -46,6 +49,18 @@ namespace Assets._Project.Gameplay
         private void FixedUpdate()
         {
             _groundChecker?.Check();
+        }
+
+        public void DrawTrajectory(Vector3[] points)
+        {
+            if (points == null)
+            {
+                _lineRenderer.positionCount = 0;
+                return;
+            }
+
+            _lineRenderer.positionCount = points.Length;
+            _lineRenderer.SetPositions(points);
         }
 
         private void OnDrawGizmos()
