@@ -16,7 +16,7 @@ namespace Assets._Project.Infrastructure
 
         public void Initialize()
         {
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = 30;
             _sceneLoader.LoadAsync("Game", LoadSceneMode.Single, activateOnLoad: true);
         }
 

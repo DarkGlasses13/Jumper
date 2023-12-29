@@ -48,6 +48,41 @@ MonoBehaviour:
       m_Action: Jump Input
       m_Flags: 0
     m_Flags: 0
+  <JumpTrajectoryInputAction>k__BackingField:
+    m_Name: Jump Trajectory Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 3ed966b5-bab8-4223-b4ba-dec50ab69a15
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: d974f4ac-f49c-46d9-af65-79e3083deffc
+      m_Path: <Gamepad>/rightStick
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump Trajectory Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 5fa6d60a-3da6-40d4-a170-c4946b7fdd3b
+      m_Path: <Mouse>/delta
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump Trajectory Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: e27e581e-2ebf-4e22-ab40-929f5184215e
+      m_Path: <Touchscreen>/delta
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump Trajectory Input
+      m_Flags: 0
+    m_Flags: 0
   <JumpForce>k__BackingField: 10
+  <JumpTrajectorySwingSpeed>k__BackingField: 0.5
   <JumpTrajectoryLength>k__BackingField: 50
   <JumpTrajectoryPointIntervals>k__BackingField: 0.1
+  <JumpTrajectoryInputSensivity>k__BackingField: 0.1

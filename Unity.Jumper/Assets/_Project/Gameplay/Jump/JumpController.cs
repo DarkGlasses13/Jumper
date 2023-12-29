@@ -10,6 +10,7 @@ namespace Assets._Project.Gameplay.Jump
         private readonly ICanJump _jumper;
         private readonly GameConfig _config;
         private float _inputForce;
+        private Vector2 _jumpDirection;
 
         public JumpController(ICanJump jumper, GameConfig config)
         {
@@ -20,6 +21,7 @@ namespace Assets._Project.Gameplay.Jump
         public void Initialize()
         {
             _config.JumpInputAction.Enable();
+            _config.JumpTrajectoryInputAction.Enable();
             _config.JumpInputAction.canceled += OnInputActionCanceled;
             _jumper.OnLand += OnLanded;
         }
@@ -45,7 +47,7 @@ namespace Assets._Project.Gameplay.Jump
             {
                 if (_config.JumpInputAction.IsPressed())
                 {
-                    _inputForce = Mathf.Clamp01(_inputForce += Time.deltaTime);
+                    _inputForce = Mathf.PingPong(Time.time * _config.JumpTrajectorySwingSpeed, 1f);
                     _jumper.DrawTrajectory(CalculateTrajectory());
                 }
             }
@@ -53,9 +55,12 @@ namespace Assets._Project.Gameplay.Jump
 
         private Vector3[] CalculateTrajectory()
         {
+            Vector2 trajectoryInput = _config.JumpTrajectoryInputAction.ReadValue<Vector2>();
+            _jumpDirection += _config.JumpTrajectoryInputSensivity * Time.deltaTime * trajectoryInput;
+            _jumpDirection = new(Mathf.Clamp(_jumpDirection.x, 0.25f, 2), Mathf.Clamp(_jumpDirection.y, 0.25f, 1));
             Vector3[] pointrajectorys = new Vector3[_config.JumpTrajectoryLength];
             Vector3 currentPosition = _jumper.Transform.position;
-            Vector3 currentVelocity = _config.JumpForce * _inputForce * new Vector3(1, 1, 0);
+            Vector3 currentVelocity = _config.JumpForce * _inputForce * (Vector3)_jumpDirection;
 
             for (int i = 0; i < pointrajectorys.Length; i++)
             {
@@ -68,7 +73,8 @@ namespace Assets._Project.Gameplay.Jump
 
         private void Jump()
         {
-            _jumper.Rigidbody.velocity = _inputForce * _config.JumpForce * Vector2.one;
+            _jumper.Rigidbody.velocity = _inputForce * _config.JumpForce * _jumpDirection;
+            _jumpDirection = Vector2.one;
         }
 
         public void Dispose()
@@ -76,6 +82,7 @@ namespace Assets._Project.Gameplay.Jump
             _config.JumpInputAction.canceled -= OnInputActionCanceled;
             _jumper.OnLand -= OnLanded;
             _config.JumpInputAction.Disable();
+            _config.JumpTrajectoryInputAction.Disable();
         }
     }
 }

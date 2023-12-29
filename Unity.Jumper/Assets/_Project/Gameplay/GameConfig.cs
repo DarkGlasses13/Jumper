@@ -10,8 +10,11 @@ namespace Assets._Project.Gameplay
         [field: SerializeField] public Vector2 PlatformDistanceRange { get; private set; }
         [field: SerializeField] public float PassedPlatformsClearDistance { get; private set; }
         [field: SerializeField] public InputAction JumpInputAction { get; private set; }
+        [field: SerializeField] public InputAction JumpTrajectoryInputAction { get; private set; }
         [field: SerializeField] public float JumpForce { get; private set; }
+        [field: SerializeField] public float JumpTrajectorySwingSpeed { get; private set; }
         [field: SerializeField] public int JumpTrajectoryLength { get; private set; } = 10;
         [field: SerializeField] public float JumpTrajectoryPointIntervals { get; private set; } = 0.1f;
+        [field: SerializeField] public float JumpTrajectoryInputSensivity { get; private set; }
     }
 }
